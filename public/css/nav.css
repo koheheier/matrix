@@ -1,0 +1,43 @@
+nav {
+    width: 100%;
+    height: 70px;
+    background-color: dimgray;
+    padding-top: 5px;
+    box-sizing: border-box;
+
+    
+  }
+
+  .ubannerlist {
+    display: flex;
+  }
+
+  .bannerlist {
+    list-style: none;
+  }
+
+  .navlist {
+    display: block;
+    text-decoration: none;
+    color: white;
+    margin-right: 35px;
+  }
+
+  .navlist:hover {
+    color: rgb(214, 237, 248);
+  }
+
+  .first_container {
+      display: flex;
+  }
+
+  .second_container {
+      margin-left: 5px;
+      border: solid 3px #00ff7f;
+      background-color: #87c3fa;
+  }
+
+  .candidate_name {
+    vertical-align: middle;
+    margin: auto 0 auto 0;
+  }

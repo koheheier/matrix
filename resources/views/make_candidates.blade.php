@@ -48,9 +48,8 @@
     <button type='submit'>登録</button>
     <script>
 
-        var candidates_tmp = document.getElementById('candidate_tmp');
-        
 
+        var candidates_tmp = document.getElementById('candidate_tmp');
         var group_id = {{ $group_id ?? 0 }};
 
         function appendCandidate(candidate_name, candidate_points){

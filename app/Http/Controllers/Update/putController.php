@@ -25,8 +25,10 @@ class putController extends Controller
         
         // 要素と重みをループさせてsave。その時、上記でsaveしたmatrixのidを使う
         $factors = $request->getFactors();
+        
         $factorNames = $factors['factorNames'];
         $factorWeights = $factors['factorWeights'];
+        $factorIds = $factors['factorIds'];
         
         // 空がないこと
         if (in_array("", $factorNames) || in_array("", $factorWeights)) {
@@ -36,15 +38,13 @@ class putController extends Controller
         
         $matrix->update();
         
-        // ポストされたmatrix_idを持つfactorを全削除する
-        Factor::where("matrix_id", $matrixId)->delete();
-        
+        // 全削除すると、候補と紐づいている奴があった時消せないので、ちゃんと更新してあげる
         for($i = 0; $i < count($factorNames); $i++) {
-            $factor_model = new factor;
+            $factor_model = Factor::where('id', $factorIds[$i])->first();
             $factor_model->name = $factorNames[$i];
             $factor_model->weight = $factorWeights[$i];
             $factor_model->matrix_id = $matrix->id;
-            $factor_model->save();  
+            $factor_model->update();
         }
         
         return redirect()->route('list')->with('feedback.success', "マトリクスを編集しました");

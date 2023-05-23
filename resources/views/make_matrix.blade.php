@@ -25,20 +25,16 @@
             <input type="text" name="factorNames[]" placeholder="要素名み入力" value="" class="factorName"><br>
             <span>要素重み</span>
             <input type="text" name="factorWeights[]" placeholder="要素重み入力" value="" class="factorWeight"><br>
-            <button type="button" class="deleteButton" onClick="deleteFactor(this.id)">削除</button>
+            <x-element.dlt_onclick_button onclick="deleteFactor(this.id)">
+                削除
+            </x-element.dlt_onclick_button>
             <hr>
         </dev>
     </template>
-
-
     <div id="factors"></div>
-
     <x-element.onclick_button onclick="appendFactor('', '')">
         追加
     </x-element.onclick_button>
-
-    
-    
     <button type='submit'>登録</button>
     <script>
 

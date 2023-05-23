@@ -26,6 +26,7 @@ class UpdateRequest extends FormRequest
         session(
             [
                 'matrixName' => $this->input('matrixName') ?? "",
+                'factorIds' => json_encode($this->input('factorIds'), JSON_UNESCAPED_UNICODE),
                 'factorNames' => json_encode($this->input('factorNames'), JSON_UNESCAPED_UNICODE),
                 'factorWeights' => json_encode($this->input('factorWeights'), JSON_UNESCAPED_UNICODE),
                 'factorLength' => is_null($this->input('factorNames')) ? 0 : count($this->input('factorNames')),
@@ -55,6 +56,7 @@ class UpdateRequest extends FormRequest
     public function getFactors(): array
     {
         return [
+            'factorIds' => $this->input('factorIds'),
             'factorNames' => $this->input('factorNames'),
             'factorWeights' => $this->input('factorWeights'),
         ];

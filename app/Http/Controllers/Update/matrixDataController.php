@@ -35,6 +35,7 @@ class matrixDataController extends Controller
             
             $factors[] = 
             [
+                "id" => $factor_model->id,
                 "name" => $factor_model->name,
                 "weight" => $factor_model->weight
             ];

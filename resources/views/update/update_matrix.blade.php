@@ -24,6 +24,7 @@
     <template id="factor_template">
         <dev class="factor">
             <span>マトリクス要素</span>
+            <input type="hidden" name="factorIds[]" class="factorId">
             <input type="text" name="factorNames[]" placeholder="要素名み入力" value="" class="factorName"><br>
             <span>要素重み</span>
             <input type="text" name="factorWeights[]" placeholder="要素重み入力" value="" class="factorWeight"><br>
@@ -45,9 +46,10 @@
     var factor = document.getElementById('factor_template');
     let factor_count = 0;
 
-    function appendFactor(factorName, factorWeight){
+    function appendFactor(factor_id, factorName, factorWeight){
         var clone = factor.content.cloneNode(true);
         // ここで、cloneの子要素のvalueに、セッションで保存した入力値を保存させてappendchildさせる
+        clone.querySelector('.factorId').value = factor_id ?? "";
         clone.querySelector('.factorName').value = factorName ?? "";
         clone.querySelector('.factorWeight').value = factorWeight ?? "";
         clone.querySelector('.factor').setAttribute("id", "factor_" + factor_count);
@@ -66,18 +68,20 @@
         var hasFailed = {{ session('hasFailed') ?? 0 }};
         // 編集中の場合
         if (hasFailed) {
+            var json_factorIds = "{{ session('factorIds') }}";
             var json_factorNames = "{{ session('factorNames') }}";
             var json_factorWeights = "{{ session('factorWeights') }}";
             /** factorNames, factorWeightsを配列に */
+            var factorIds = JSON.parse(json_factorIds.replace(/&quot;/g,'"'));
             var factorNames = JSON.parse(json_factorNames.replace(/&quot;/g,'"'));
             var factorWeights = JSON.parse(json_factorWeights.replace(/&quot;/g,'"'));  
             for (let i = 0; i < factorLength; i++) {
-                appendFactor(factorNames[i], factorWeights[i]);
+                appendFactor(factorIds[i], factorNames[i], factorWeights[i]);
             }
         } else {
             var updateFactors = JSON.parse("{{ $facs }}".replace(/&quot;/g,'"'))
             for(let i = 0; i < updateFactors.length; i++){
-                appendFactor(updateFactors[i]['name'], updateFactors[i]['weight']);
+                appendFactor(updateFactors[i]['id'], updateFactors[i]['name'], updateFactors[i]['weight']);
             }
         }
     });

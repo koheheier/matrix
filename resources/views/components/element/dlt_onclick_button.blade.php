@@ -13,12 +13,12 @@
             font-medium
             rounded-md
             text-white
-            bg-blue-500
-            hover:bg-blue-600
+            bg-red-500
+            hover:bg-red-600
             focus:outline-none
             focus:ring-2
             focus:ring-offset-2
-            focus:ring-blue-500"
+            focus:ring-red-500"
         onclick="{{ $onclick }}"
             >
     {{ $slot }}

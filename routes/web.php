@@ -41,6 +41,7 @@ Route::get('/make', [\App\Http\Controllers\updateController::class, 'make']);
 Route::post('/create_matrix', \App\Http\Controllers\createMatrixController::class)->name('create_matrix');
 
 Route::get('/make_candidates/{matrixId}', \App\Http\Controllers\makeCandidatesController::class)->name('make_candidates')->where('matrixId', '[0-9]+');
+Route::get('/create_candidates', \App\Http\Controllers\createCandidatesController::class)->name('create_candidates');
 Route::post('/create_candidates', \App\Http\Controllers\createCandidatesController::class)->name('create_candidates');
 
 Route::get('/update/matrix_data/{matrixId}', \App\Http\Controllers\Update\matrixDataController::class)->name('update_matrix_data')->where('matrixId', '[0-9]+');

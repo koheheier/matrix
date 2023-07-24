@@ -7,7 +7,7 @@
     @foreach ($errors->all() as $error)
         <li style="color: red;">{{$error}}</li>
     @endforeach
-    
+
     @if($deficiency ?? false)
         <li style="color: red;">{{ $deficiency }}</li>
     @endif

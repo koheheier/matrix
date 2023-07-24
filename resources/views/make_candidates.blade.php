@@ -9,9 +9,11 @@
 
 <form action="{{ route('create_candidates') }}" method="post" enctype="multipart/form-data">
     @csrf
-    @foreach ($errors->all() as $error)
-        <li style="color: red;">{{ $error }}</li>
-    @endforeach
+    @if(session('errorParameters'))
+        @foreach (session('errorParameters') as $error)
+            <li style="color: red; list-style:none;">{{ $error }}</li>
+        @endforeach
+    @endif
     
     @if($deficiency ?? false)
         <li style="color: red;">{{ $deficiency }}</li>
@@ -30,7 +32,7 @@
                 <div class="candidate_factor">
                     <input type="hidden" value='{{ $factor["id"] }}' id="factor_id">
                     <div>
-                        {{ $factor["name"] }} : {{ $factor["weight"] }}
+                        {{ $factor["name"] }} : {{ $factor["weight"] }} ↓ポイントを数字で入力
                     </div>
                     <input type="text" placeholder="候補ポイントを入力" class="candidate_points">
                 </div>
